@@ -5,6 +5,7 @@ import 'openzeppelin-solidity/contracts/math/SafeMath.sol';
 contract Token {
   using SafeMath for uint;
 
+  // Variables
   string public name = 'Flow';
   string public symbol = 'FLO';
   uint256 public decimals = 18;
