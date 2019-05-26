@@ -3,14 +3,10 @@ const Token = artifacts.require('Token');
 const Exchange = artifacts.require('Exchange');
 
 // Utils
-const ETHER_ADDRESS = '0x0000000000000000000000000000000000000000';
-
-const EVM_REVERT = 'VM Exception while processing transaction: revert';
-
+const ETHER_ADDRESS = '0x0000000000000000000000000000000000000000'; // Ether token deposit address
 const ether = n => {
   return new web3.utils.BN(web3.utils.toWei(n.toString(), 'ether'));
 };
-
 const tokens = n => ether(n);
 
 const wait = seconds => {
@@ -57,7 +53,7 @@ module.exports = async function(callback) {
     await exchange.depositToken(token.address, tokens(amount), { from: user2 });
     console.log(`Deposited ${amount} tokens from ${user2}`);
 
-    //////////////////////////////////
+    /////////////////////////////////////////////////////////////
     // Seed a Cancelled Order
     //
 
@@ -73,12 +69,12 @@ module.exports = async function(callback) {
     );
     console.log(`Made order from ${user1}`);
 
-    // User 1 cancels order
+    // User 1 cancells order
     orderId = result.logs[0].args.id;
     await exchange.cancelOrder(orderId, { from: user1 });
     console.log(`Cancelled order from ${user1}`);
 
-    //////////////////////////////////
+    /////////////////////////////////////////////////////////////
     // Seed Filled Orders
     //
 
@@ -87,10 +83,15 @@ module.exports = async function(callback) {
       token.address,
       tokens(100),
       ETHER_ADDRESS,
-      ether(0.01),
+      ether(0.1),
       { from: user1 }
     );
     console.log(`Made order from ${user1}`);
+
+    // User 2 fills order
+    orderId = result.logs[0].args.id;
+    await exchange.fillOrder(orderId, { from: user2 });
+    console.log(`Filled order from ${user1}`);
 
     // Wait 1 second
     await wait(1);
@@ -118,7 +119,7 @@ module.exports = async function(callback) {
       token.address,
       tokens(200),
       ETHER_ADDRESS,
-      ether(0.015),
+      ether(0.15),
       { from: user1 }
     );
     console.log(`Made order from ${user1}`);
@@ -131,11 +132,11 @@ module.exports = async function(callback) {
     // Wait 1 second
     await wait(1);
 
-    //////////////////////////////////
+    /////////////////////////////////////////////////////////////
     // Seed Open Orders
     //
 
-    //User 1 makes 10 orders
+    // User 1 makes 10 orders
     for (let i = 1; i <= 10; i++) {
       result = await exchange.makeOrder(
         token.address,
@@ -158,6 +159,9 @@ module.exports = async function(callback) {
         tokens(10 * i),
         { from: user2 }
       );
+      console.log(`Made order from ${user2}`);
+      // Wait 1 second
+      await wait(1);
     }
   } catch (error) {
     console.log(error);
