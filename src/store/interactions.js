@@ -16,13 +16,15 @@ import {
   exchangeEtherBalanceLoaded,
   exchangeTokenBalanceLoaded,
   balancesLoaded,
-  balancesLoading
+  balancesLoading,
+  buyOrderMaking,
+  sellOrderMaking,
+  orderMade
 } from './actions';
 import Token from '../abis/Token.json';
 import Exchange from '../abis/Exchange.json';
 import { ETHER_ADDRESS } from '../helpers';
 
-// Blockchain interactions
 export const loadWeb3 = dispatch => {
   const web3 = new Web3(Web3.givenProvider || 'http://localhost:7545');
   dispatch(web3Loaded(web3));
@@ -69,27 +71,27 @@ export const loadExchange = async (web3, networkId, dispatch) => {
 };
 
 export const loadAllOrders = async (exchange, dispatch) => {
-  // Fetch cancelled orders with 'Cancel' event stream
+  // Fetch cancelled orders with the "Cancel" event stream
   const cancelStream = await exchange.getPastEvents('Cancel', {
     fromBlock: 0,
     toBlock: 'latest'
   });
   // Format cancelled orders
   const cancelledOrders = cancelStream.map(event => event.returnValues);
-  // Add cancelled orders to redux store
+  // Add cancelled orders to the redux store
   dispatch(cancelledOrdersLoaded(cancelledOrders));
 
-  // Fetch filled orders with the 'Trade' event stream
+  // Fetch filled orders with the "Trade" event stream
   const tradeStream = await exchange.getPastEvents('Trade', {
     fromBlock: 0,
     toBlock: 'latest'
   });
   // Format filled orders
   const filledOrders = tradeStream.map(event => event.returnValues);
-  // Add filled orders to redux store
+  // Add cancelled orders to the redux store
   dispatch(filledOrdersLoaded(filledOrders));
 
-  //Load order stream
+  // Load order stream
   const orderStream = await exchange.getPastEvents('Order', {
     fromBlock: 0,
     toBlock: 'latest'
@@ -116,6 +118,10 @@ export const subscribeToEvents = async (exchange, dispatch) => {
   exchange.events.Withdraw({}, (error, event) => {
     dispatch(balancesLoaded());
   });
+
+  exchange.events.Order({}, (error, event) => {
+    dispatch(orderMade(event.returnValues));
+  });
 };
 
 export const cancelOrder = (dispatch, exchange, order, account) => {
@@ -126,7 +132,7 @@ export const cancelOrder = (dispatch, exchange, order, account) => {
       dispatch(orderCancelling());
     })
     .on('error', error => {
-      console.error(error);
+      console.log(error);
       window.alert('There was an error!');
     });
 };
@@ -139,7 +145,7 @@ export const fillOrder = (dispatch, exchange, order, account) => {
       dispatch(orderFilling());
     })
     .on('error', error => {
-      console.error(error);
+      console.log(error);
       window.alert('There was an error!');
     });
 };
@@ -155,7 +161,7 @@ export const loadBalances = async (
   const etherBalance = await web3.eth.getBalance(account);
   dispatch(etherBalanceLoaded(etherBalance));
 
-  //Token balance in wallet
+  // Token balance in wallet
   const tokenBalance = await token.methods.balanceOf(account).call();
   dispatch(tokenBalanceLoaded(tokenBalance));
 
@@ -177,16 +183,13 @@ export const loadBalances = async (
 
 export const depositEther = (dispatch, exchange, web3, amount, account) => {
   exchange.methods.depositEther
-    .send({
-      from: account,
-      value: web3.utils.toWei(amount, 'ether')
-    })
+    .send({ from: account, value: web3.utils.toWei(amount, 'ether') })
     .on('transactionHash', hash => {
       dispatch(balancesLoading());
     })
     .on('error', error => {
       console.error(error);
-      window.alert('There was an error!');
+      window.alert(`There was an error!`);
     });
 };
 
@@ -199,7 +202,7 @@ export const withdrawEther = (dispatch, exchange, web3, amount, account) => {
     })
     .on('error', error => {
       console.error(error);
-      window.alert('There was an error!');
+      window.alert(`There was an error!`);
     });
 };
 
@@ -225,7 +228,7 @@ export const depositToken = (
         })
         .on('error', error => {
           console.error(error);
-          window.alert('There was an error!');
+          window.alert(`There was an error!`);
         });
     });
 };
@@ -246,6 +249,62 @@ export const withdrawToken = (
     })
     .on('error', error => {
       console.error(error);
-      window.alert('There was an error!');
+      window.alert(`There was an error!`);
+    });
+};
+
+export const makeBuyOrder = (
+  dispatch,
+  exchange,
+  token,
+  web3,
+  order,
+  account
+) => {
+  const tokenGet = token.options.address;
+  const amountGet = web3.utils.toWei(order.amount, 'ether');
+  const tokenGive = ETHER_ADDRESS;
+  const amountGive = web3.utils.toWei(
+    (order.amount * order.price).toString(),
+    'ether'
+  );
+
+  exchange.methods
+    .makeOrder(tokenGet, amountGet, tokenGive, amountGive)
+    .send({ from: account })
+    .on('transactionHash', hash => {
+      dispatch(buyOrderMaking());
+    })
+    .on('error', error => {
+      console.error(error);
+      window.alert(`There was an error!`);
+    });
+};
+
+export const makeSellOrder = (
+  dispatch,
+  exchange,
+  token,
+  web3,
+  order,
+  account
+) => {
+  const tokenGet = ETHER_ADDRESS;
+  const amountGet = web3.utils.toWei(
+    (order.amount * order.price).toString(),
+    'ether'
+  );
+  const tokenGive = token.options.address;
+  const amountGive = web3.utils.toWei(order.amount, 'ether');
+
+  exchange.methods
+    .makeOrder(tokenGet, amountGet, tokenGive, amountGive)
+    .send({ from: account })
+    .on('transactionHash', hash => {
+      dispatch(sellOrderMaking());
+    })
+    .on('error', error => {
+      console.error(error);
+      window.alert(`There was an error!`);
     });
 };

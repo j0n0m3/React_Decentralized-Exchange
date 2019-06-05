@@ -1,197 +1,198 @@
 // WEB3
-export const web3Loaded = connection => {
+export function web3Loaded(connection) {
   return {
     type: 'WEB3_LOADED',
     connection
   };
-};
+}
 
-export const web3AccountLoaded = account => {
+export function web3AccountLoaded(account) {
   return {
     type: 'WEB3_ACCOUNT_LOADED',
     account
   };
-};
+}
 
 // TOKEN
-export const tokenLoaded = contract => {
+export function tokenLoaded(contract) {
   return {
     type: 'TOKEN_LOADED',
     contract
   };
-};
+}
 
 // EXCHANGE
-export const exchangeLoaded = contract => {
+export function exchangeLoaded(contract) {
   return {
     type: 'EXCHANGE_LOADED',
     contract
   };
-};
+}
 
-export const cancelledOrdersLoaded = cancelledOrders => {
+export function cancelledOrdersLoaded(cancelledOrders) {
   return {
     type: 'CANCELLED_ORDERS_LOADED',
     cancelledOrders
   };
-};
+}
 
-export const filledOrdersLoaded = filledOrders => {
+export function filledOrdersLoaded(filledOrders) {
   return {
     type: 'FILLED_ORDERS_LOADED',
     filledOrders
   };
-};
+}
 
-export const allOrdersLoaded = allOrders => {
+export function allOrdersLoaded(allOrders) {
   return {
     type: 'ALL_ORDERS_LOADED',
     allOrders
   };
-};
+}
 
 // Cancel Order
-export const orderCancelling = () => {
+export function orderCancelling() {
   return {
     type: 'ORDER_CANCELLING'
   };
-};
+}
 
-export const orderCancelled = order => {
+export function orderCancelled(order) {
   return {
     type: 'ORDER_CANCELLED',
     order
   };
-};
+}
 
 // Fill Order
-export const orderFilling = () => {
+export function orderFilling() {
   return {
     type: 'ORDER_FILLING'
   };
-};
+}
 
-export const orderFilled = order => {
+export function orderFilled(order) {
   return {
     type: 'ORDER_FILLED',
     order
   };
-};
+}
 
 // Balances
-export const etherBalanceLoaded = balance => {
+export function etherBalanceLoaded(balance) {
   return {
     type: 'ETHER_BALANCE_LOADED',
     balance
   };
-};
+}
 
-export const tokenBalanceLoaded = balance => {
+export function tokenBalanceLoaded(balance) {
   return {
     type: 'TOKEN_BALANCE_LOADED',
     balance
   };
-};
+}
 
-export const exchangeEtherBalanceLoaded = balance => {
+export function exchangeEtherBalanceLoaded(balance) {
   return {
     type: 'EXCHANGE_ETHER_BALANCE_LOADED',
     balance
   };
-};
+}
 
-export const exchangeTokenBalanceLoaded = balance => {
+export function exchangeTokenBalanceLoaded(balance) {
   return {
     type: 'EXCHANGE_TOKEN_BALANCE_LOADED',
     balance
   };
-};
+}
 
-export const balancesLoaded = () => {
+export function balancesLoaded() {
   return {
     type: 'BALANCES_LOADED'
   };
-};
+}
 
-export const balancesLoading = () => {
+export function balancesLoading() {
   return {
     type: 'BALANCES_LOADING'
   };
-};
+}
 
-export const etherDepositAmountChanged = amount => {
+export function etherDepositAmountChanged(amount) {
   return {
     type: 'ETHER_DEPOSIT_AMOUNT_CHANGED',
     amount
   };
-};
+}
 
-export const etherWithdrawAmountChanged = amount => {
+export function etherWithdrawAmountChanged(amount) {
   return {
     type: 'ETHER_WITHDRAW_AMOUNT_CHANGED',
     amount
   };
-};
+}
 
-export const tokenDepositAmountChanged = amount => {
+export function tokenDepositAmountChanged(amount) {
   return {
     type: 'TOKEN_DEPOSIT_AMOUNT_CHANGED',
     amount
   };
-};
+}
 
-export const tokenWithdrawAmountChanged = amount => {
+export function tokenWithdrawAmountChanged(amount) {
   return {
     type: 'TOKEN_WITHDRAW_AMOUNT_CHANGED',
     amount
   };
-};
+}
 
 // Buy Order
-export const buyOrderAmountChanged = amount => {
+export function buyOrderAmountChanged(amount) {
   return {
-    type: 'BUY_ORDER_AMOUNT_CHANGED'
+    type: 'BUY_ORDER_AMOUNT_CHANGED',
+    amount
   };
-};
+}
 
-export const buyOrderPriceChanged = price => {
+export function buyOrderPriceChanged(price) {
   return {
     type: 'BUY_ORDER_PRICE_CHANGED',
     price
   };
-};
+}
 
-export const buyOrderMaking = price => {
+export function buyOrderMaking(price) {
   return {
     type: 'BUY_ORDER_MAKING'
   };
-};
+}
 
 // Generic Order
-export const orderMade = order => {
+export function orderMade(order) {
   return {
     type: 'ORDER_MADE',
     order
   };
-};
+}
 
 // Sell Order
-export const sellOrderAmountChanged = amount => {
+export function sellOrderAmountChanged(amount) {
   return {
     type: 'SELL_ORDER_AMOUNT_CHANGED',
     amount
   };
-};
+}
 
-export const sellOrderPriceChanged = price => {
+export function sellOrderPriceChanged(price) {
   return {
     type: 'SELL_ORDER_PRICE_CHANGED',
     price
   };
-};
+}
 
-export const sellOrderMaking = price => {
+export function sellOrderMaking(price) {
   return {
     type: 'SELL_ORDER_MAKING'
   };
-};
+}

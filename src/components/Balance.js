@@ -95,7 +95,7 @@ const showForm = props => {
         <table className='table table-dark table-sm small'>
           <tbody>
             <tr>
-              <td>FLO</td>
+              <td>DAPP</td>
               <td>{tokenBalance}</td>
               <td>{exchangeTokenBalance}</td>
             </tr>
@@ -119,7 +119,7 @@ const showForm = props => {
           <div className='col-12 col-sm pr-sm-2'>
             <input
               type='text'
-              placeholder='FLO Amount'
+              placeholder='DAPP Amount'
               onChange={e =>
                 dispatch(tokenDepositAmountChanged(e.target.value))
               }
@@ -187,7 +187,7 @@ const showForm = props => {
         <table className='table table-dark table-sm small'>
           <tbody>
             <tr>
-              <td>FLO</td>
+              <td>DAPP</td>
               <td>{tokenBalance}</td>
               <td>{exchangeTokenBalance}</td>
             </tr>
@@ -211,7 +211,7 @@ const showForm = props => {
           <div className='col-12 col-sm pr-sm-2'>
             <input
               type='text'
-              placeholder='FLO Amount'
+              placeholder='DAPP Amount'
               onChange={e =>
                 dispatch(tokenWithdrawAmountChanged(e.target.value))
               }
@@ -245,7 +245,7 @@ class Balance extends Component {
       <div className='card bg-dark text-white'>
         <div className='card-header'>Balance</div>
         <div className='card-body'>
-          {showForm ? showForm(this.props) : <Spinner />}
+          {this.props.showForm ? showForm(this.props) : <Spinner />}
         </div>
       </div>
     );

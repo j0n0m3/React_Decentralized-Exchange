@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const web3 = (state = {}, action) => {
+function web3(state = {}, action) {
   switch (action.type) {
     case 'WEB3_LOADED':
       return { ...state, connection: action.connection };
@@ -11,9 +11,9 @@ const web3 = (state = {}, action) => {
     default:
       return state;
   }
-};
+}
 
-const token = (state = {}, action) => {
+function token(state = {}, action) {
   switch (action.type) {
     case 'TOKEN_LOADED':
       return { ...state, loaded: true, contract: action.contract };
@@ -22,9 +22,9 @@ const token = (state = {}, action) => {
     default:
       return state;
   }
-};
+}
 
-const exchange = (state = {}, action) => {
+function exchange(state = {}, action) {
   let index, data;
 
   switch (action.type) {
@@ -40,12 +40,8 @@ const exchange = (state = {}, action) => {
         ...state,
         filledOrders: { loaded: true, data: action.filledOrders }
       };
-
     case 'ALL_ORDERS_LOADED':
-      return {
-        ...state,
-        allOrders: { loaded: true, data: action.allOrders }
-      };
+      return { ...state, allOrders: { loaded: true, data: action.allOrders } };
     case 'ORDER_CANCELLING':
       return { ...state, orderCancelling: true };
     case 'ORDER_CANCELLED':
@@ -62,11 +58,13 @@ const exchange = (state = {}, action) => {
       index = state.filledOrders.data.findIndex(
         order => order.id === action.order.id
       );
+
       if (index === -1) {
         data = [...state.filledOrders.data, action.order];
       } else {
         data = state.filledOrders.data;
       }
+
       return {
         ...state,
         orderFilling: false,
@@ -75,8 +73,10 @@ const exchange = (state = {}, action) => {
           data
         }
       };
+
     case 'ORDER_FILLING':
       return { ...state, orderFilling: true };
+
     case 'EXCHANGE_ETHER_BALANCE_LOADED':
       return { ...state, etherBalance: action.balance };
     case 'EXCHANGE_TOKEN_BALANCE_LOADED':
@@ -84,7 +84,7 @@ const exchange = (state = {}, action) => {
     case 'BALANCES_LOADING':
       return { ...state, balancesLoading: true };
     case 'BALANCES_LOADED':
-      return { ...state, balancesLoading: true };
+      return { ...state, balancesLoading: false };
     case 'ETHER_DEPOSIT_AMOUNT_CHANGED':
       return { ...state, etherDepositAmount: action.amount };
     case 'ETHER_WITHDRAW_AMOUNT_CHANGED':
@@ -100,15 +100,13 @@ const exchange = (state = {}, action) => {
         buyOrder: { ...state.buyOrder, amount: action.amount }
       };
     case 'BUY_ORDER_PRICE_CHANGED':
-      return {
-        ...state,
-        buyOrder: { ...state.buyOrder, price: action.price }
-      };
+      return { ...state, buyOrder: { ...state.buyOrder, price: action.price } };
     case 'BUY_ORDER_MAKING':
       return {
         ...state,
         buyOrder: { ...state.buyOrder, amount: null, price: null, making: true }
       };
+
     case 'ORDER_MADE':
       // Prevent duplicate orders
       index = state.allOrders.data.findIndex(
@@ -157,10 +155,11 @@ const exchange = (state = {}, action) => {
           making: true
         }
       };
+
     default:
       return state;
   }
-};
+}
 
 const rootReducer = combineReducers({
   web3,
