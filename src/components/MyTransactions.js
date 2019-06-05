@@ -93,7 +93,7 @@ class MyTransactions extends Component {
                 <thead>
                   <tr>
                     <th>Amount</th>
-                    <th>FLO</th>
+                    <th>FLO/ETH</th>
                     <th>Cancel</th>
                   </tr>
                 </thead>

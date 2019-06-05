@@ -11,9 +11,9 @@ import {
 const priceSymbol = lastPriceChange => {
   let output;
   if (lastPriceChange === '+') {
-    output = <span className='text-success'>&#9650;</span>; // Green up triangle
+    output = <span className='text-success'>&#9650;</span>; // Green up tiangle
   } else {
-    output = <span className='text-danger'>&#9650;</span>; // Red down triangle
+    output = <span className='text-danger'>&#9660;</span>; // Red down triangle
   }
   return output;
 };
@@ -23,7 +23,7 @@ const showPriceChart = priceChart => {
     <div className='price-chart'>
       <div className='price'>
         <h4>
-          FLO/ETH &nbsp; {priceSymbol(priceChart.lastPriceChange)} &nbsp;
+          FLO/ETH &nbsp; {priceSymbol(priceChart.lastPriceChange)} &nbsp;{' '}
           {priceChart.lastPrice}
         </h4>
       </div>

@@ -5,9 +5,9 @@ import { accountSelector } from '../store/selectors';
 class Navbar extends Component {
   render() {
     return (
-      <nav className='navbar navbar-expand-lg navbar-dark bg-primary'>
-        <a className='navbar-brand' href='/#'>
-          DEX
+      <nav className='navbar navbar-expand-lg navbar-dark bg-secondary'>
+        <a className='navbar-brand' href='#/'>
+          DAX
         </a>
         <button
           className='navbar-toggler'

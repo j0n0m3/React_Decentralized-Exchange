@@ -12,37 +12,37 @@ export const chartOptions = {
       fontFamily: undefined
     },
     x: {
-      show: false,
-      format: 'dd MMM',
-      formatter: undefined
+        show: false,
+        format: 'dd MMM',
+        formatter: undefined,
     },
     y: {
       show: true,
       title: 'price'
     },
     marker: {
-      show: false
+      show: false,
     },
     items: {
-      display: 'flex'
+       display: 'flex',
     },
     fixed: {
-      enabled: false,
-      position: 'topRight',
-      offsetX: 0,
-      offsetY: 0
-    }
+        enabled: false,
+        position: 'topRight',
+        offsetX: 0,
+        offsetY: 0,
+    },
   },
   xaxis: {
     type: 'datetime',
     labels: {
       show: true,
       style: {
-        colors: '#fff',
-        fontSize: '8px',
-        cssClass: 'apexcharts-xaxis-label'
-      }
-    }
+          colors: '#fff',
+          fontSize: '8px',
+          cssClass: 'apexcharts-xaxis-label',
+      },
+    },
   },
   yaxis: {
     labels: {
@@ -52,14 +52,14 @@ export const chartOptions = {
       style: {
         color: '#fff',
         fontSize: '8px',
-        cssClass: 'apexcharts-yaxis-label'
+        cssClass: 'apexcharts-yaxis-label',
       },
       offsetX: 0,
       offsetY: 0,
-      rotate: 0
+      rotate: 0,
     }
   }
-};
+}
 
 export const dummyData = [
   {
@@ -303,7 +303,7 @@ export const dummyData = [
       {
         x: new Date(1538884800000),
         y: [6604.98, 6606, 6604.07, 6606]
-      }
+      },
     ]
   }
-];
+]
