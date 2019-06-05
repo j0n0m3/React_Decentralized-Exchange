@@ -166,3 +166,32 @@ export const buyOrderMaking = price => {
     type: 'BUY_ORDER_MAKING'
   };
 };
+
+// Generic Order
+export const orderMade = order => {
+  return {
+    type: 'ORDER_MADE',
+    order
+  };
+};
+
+// Sell Order
+export const sellOrderAmountChanged = amount => {
+  return {
+    type: 'SELL_ORDER_AMOUNT_CHANGED',
+    amount
+  };
+};
+
+export const sellOrderPriceChanged = price => {
+  return {
+    type: 'SELL_ORDER_PRICE_CHANGED',
+    price
+  };
+};
+
+export const sellOrderMaking = price => {
+  return {
+    type: 'SELL_ORDER_MAKING'
+  };
+};
