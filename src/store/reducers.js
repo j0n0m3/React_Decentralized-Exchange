@@ -38,7 +38,7 @@ const exchange = (state = {}, action) => {
     case 'ALL_ORDERS_LOADED':
       return {
         ...state,
-        allORders: { loaded: true, data: action.allOrders }
+        allOrders: { loaded: true, data: action.allOrders }
       };
     default:
       return state;

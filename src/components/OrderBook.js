@@ -35,7 +35,7 @@ class OrderBook extends Component {
     return (
       <div className='vertical'>
         <div className='card bg-dark text-white'>
-          <div clssName='card-header'>Order Book</div>
+          <div className='card-header'>Order Book</div>
           <div className='card-body order-book'>
             <table className='table table-dark table-sm small'>
               {this.props.showOrderBook ? (
