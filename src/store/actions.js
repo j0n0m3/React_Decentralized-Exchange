@@ -63,3 +63,106 @@ export const orderCancelled = order => {
     order
   };
 };
+
+// Fill Order
+export const orderFilling = () => {
+  return {
+    type: 'ORDER_FILLING'
+  };
+};
+
+export const orderFilled = order => {
+  return {
+    type: 'ORDER_FILLED',
+    order
+  };
+};
+
+// Balances
+export const etherBalanceLoaded = balance => {
+  return {
+    type: 'ETHER_BALANCE_LOADED',
+    balance
+  };
+};
+
+export const tokenBalanceLoaded = balance => {
+  return {
+    type: 'TOKEN_BALANCE_LOADED',
+    balance
+  };
+};
+
+export const exchangeEtherBalanceLoaded = balance => {
+  return {
+    type: 'EXCHANGE_ETHER_BALANCE_LOADED',
+    balance
+  };
+};
+
+export const exchangeTokenBalanceLoaded = balance => {
+  return {
+    type: 'EXCHANGE_TOKEN_BALANCE_LOADED',
+    balance
+  };
+};
+
+export const balancesLoaded = () => {
+  return {
+    type: 'BALANCES_LOADED'
+  };
+};
+
+export const balancesLoading = () => {
+  return {
+    type: 'BALANCES_LOADING'
+  };
+};
+
+export const etherDepositAmountChanged = amount => {
+  return {
+    type: 'ETHER_DEPOSIT_AMOUNT_CHANGED',
+    amount
+  };
+};
+
+export const etherWithdrawAmountChanged = amount => {
+  return {
+    type: 'ETHER_WITHDRAW_AMOUNT_CHANGED',
+    amount
+  };
+};
+
+export const tokenDepositAmountChanged = amount => {
+  return {
+    type: 'TOKEN_DEPOSIT_AMOUNT_CHANGED',
+    amount
+  };
+};
+
+export const tokenWithdrawAmountChanged = amount => {
+  return {
+    type: 'TOKEN_WITHDRAW_AMOUNT_CHANGED',
+    amount
+  };
+};
+
+// Buy Order
+export const buyOrderAmountChanged = amount => {
+  return {
+    type: 'BUY_ORDER_AMOUNT_CHANGED'
+  };
+};
+
+export const buyOrderPriceChanged = price => {
+  return {
+    type: 'BUY_ORDER_PRICE_CHANGED',
+    price
+  };
+};
+
+export const buyOrderMaking = price => {
+  return {
+    type: 'BUY_ORDER_MAKING'
+  };
+};
