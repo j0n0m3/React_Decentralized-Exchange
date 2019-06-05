@@ -1,1 +1,2 @@
-Decentralized Exchange powered by Smart Contracts
+truffle migrate --reset
+truffle exec scripts/seed-exchange.js

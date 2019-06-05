@@ -7,7 +7,7 @@ class Navbar extends Component {
     return (
       <nav className='navbar navbar-expand-lg navbar-dark bg-primary'>
         <a className='navbar-brand' href='/#'>
-          Decentralized Token Exchange
+          DEX
         </a>
         <button
           className='navbar-toggler'
